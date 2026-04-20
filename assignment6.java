@@ -39,9 +39,16 @@ class BinaryTree<T extends Comparable<T>> {
   //
   // STUDENTS MUST IMPLEMENT THIS METHOD!!!!
   public int size(){ // a method to return the number of elements in the tree
-    System.out.println("BinaryTree.size() method has not been implemented yet!!!!");
-    return -1;
+    return sizeRecursively(this.root);
   }
+
+  private int sizeRecursively(Node<T> root) {
+    if(root == null) {
+      return 0;
+    }
+    return 1 + sizeRecursively(root.left) + sizeRecursively(root.right);
+  }
+
 
   // ********************************** height() **********************************
   //
@@ -112,8 +119,25 @@ class BinaryTree<T extends Comparable<T>> {
   // STUDENTS MUST IMPLEMENT THIS METHOD!!!!
 
   public boolean find(T item){
-    System.out.println("BinaryTree.find() method has not been implemented yet!!!!");
-    return false;
+    return findRecursively(this.root, item);
+  }
+
+  private boolean findRecursively(Node<T> root, T item) {
+    if(root == null) {
+      return false;
+    }
+
+    int r = item.compareTo(root.element);
+
+    if(r == 0) {
+      return true;
+    }
+    else if(r < 0) {
+      return findRecursively(root.left, item);
+    }
+    else {
+      return findRecursively(root.right, item);
+    }
   }
 
   // ********************************** delete(T item) **********************************
@@ -151,11 +175,37 @@ class BinaryTree<T extends Comparable<T>> {
           root.element = minItem;
           root.right = deleteRecursively(root.right,minItem);
         }
-        System.out.println(item+" was deleted form the tree.");
+        System.out.println(item+" was deleted from the tree.");
       }
     }
     return root;
   }
+
+//*************************** getMax() ***********************************/
+//
+//
+public T getMax() {
+  if(root == null) {
+    return null;
+  }
+  return getMaxRecursively(this.root);
+}
+
+private T getMaxRecursively(Node<T> root) {
+  if(root.right == null) {
+    return root.element;
+  }
+  return getMaxRecursively(root.right);
+}
+
+//**************************** getMin() **********************************/
+public T getMin() {
+  if(this.root == null) {
+    return null;
+  }
+  return getMinRecursively(this.root);
+}
+
 
   private T getMinRecursively(Node<T> root){
     T item = null;
@@ -187,6 +237,8 @@ public class assignment6 {
       System.out.println( "3: tree height");
       System.out.println( "4: display items");
       System.out.println( "5: delete item");
+      System.out.println( "6: find max item");
+      System.out.println( "7: find mininum item");
       System.out.println( "9: exit");
       ch = sc.nextInt();
 
@@ -214,6 +266,18 @@ public class assignment6 {
           System.out.println( "enter item to delete:");
           item = sc.nextInt(); 
           tree.delete(item);
+          break;
+        case 6:
+          if(tree.isEmpty()) 
+            System.out.println("Empty tree!");
+          else
+            System.out.println("Max value: " + tree.getMax());
+          break;
+        case 7:
+          if(tree.isEmpty())
+            System.out.println("Empty tree!");
+          else
+            System.out.println("Mininum value: " + tree.getMin());
           break;
         case 9:
           quit = true;

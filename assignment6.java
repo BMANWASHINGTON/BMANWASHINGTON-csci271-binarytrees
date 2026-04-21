@@ -42,7 +42,7 @@ class BinaryTree<T extends Comparable<T>> {
     return sizeRecursively(this.root);
   }
 
-  private int sizeRecursively(Node<T> root) {
+  private int sizeRecursively(Node<T> root) { // Recursively counts elements from root
     if(root == null) {
       return 0;
     }
@@ -118,16 +118,16 @@ class BinaryTree<T extends Comparable<T>> {
   //
   // STUDENTS MUST IMPLEMENT THIS METHOD!!!!
 
-  public boolean find(T item){
+  public boolean find(T item){ // method that finds a certain element in binary tree 
     return findRecursively(this.root, item);
   }
 
-  private boolean findRecursively(Node<T> root, T item) {
+  private boolean findRecursively(Node<T> root, T item) { // Recursively searches for element
     if(root == null) {
       return false;
     }
 
-    int r = item.compareTo(root.element);
+    int r = item.compareTo(root.element); // Element being compared  
 
     if(r == 0) {
       return true;
@@ -184,22 +184,22 @@ class BinaryTree<T extends Comparable<T>> {
 //*************************** getMax() ***********************************/
 //
 //
-public T getMax() {
+public T getMax() { // method finds the maximum element
   if(root == null) {
     return null;
   }
   return getMaxRecursively(this.root);
 }
 
-private T getMaxRecursively(Node<T> root) {
-  if(root.right == null) {
+private T getMaxRecursively(Node<T> root) { // Recursivelt searches for max element
+  if(root.right == null) { // Starts from the right of the binary tree
     return root.element;
   }
   return getMaxRecursively(root.right);
 }
 
 //**************************** getMin() **********************************/
-public T getMin() {
+public T getMin() { // method finds minimum element in binary tree
   if(this.root == null) {
     return null;
   }
@@ -209,10 +209,10 @@ public T getMin() {
 
   private T getMinRecursively(Node<T> root){
     T item = null;
-    if(root.left==null)
+    if(root.left==null) // Searches the right of the binary tree
       item = root.element;
     else
-      item = getMinRecursively(root.left);
+      item = getMinRecursively(root.left); // Searches left side of binary tree
     return item;
   }
 }

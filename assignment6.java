@@ -239,6 +239,7 @@ public class assignment6 {
       System.out.println( "5: delete item");
       System.out.println( "6: find max item");
       System.out.println( "7: find mininum item");
+      System.out.println( "8: display size of tree");
       System.out.println( "9: exit");
       ch = sc.nextInt();
 
@@ -279,6 +280,12 @@ public class assignment6 {
           else
             System.out.println("Mininum value: " + tree.getMin());
           break;
+        case 8:
+          if(tree.isEmpty())
+            System.out.println("Empty tree!");
+          else
+            System.out.println("There are " + tree.size() + " items.");
+            break;
         case 9:
           quit = true;
           System.out.println( "Goodbye!!");
